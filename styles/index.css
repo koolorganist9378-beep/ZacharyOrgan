@@ -4,4 +4,7 @@ body{
     box-sizing: border-box;
     background: url("D:\ZacharyOrgan\img\OrganBackground.jpg");
     display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height:100vh;
 }
