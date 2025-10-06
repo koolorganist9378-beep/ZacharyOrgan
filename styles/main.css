@@ -70,13 +70,17 @@ body{
   background-color: #eca65a;
   height: 100px;
   border: 1px;
+  margin-left: -6.25px;
+  margin-right: -6.25px;
 }
 
 .brown{
-  width: 2px;
+  width: 4px;
   background-color: #1a0301;
   height: 50px;
   border: 1px;
+  margin-left: -6.25px;
+  margin-right: -6.25px;
 }
 
 .organ-layout{
@@ -113,13 +117,14 @@ body{
   text-align: center;
   cursor: pointer;
   box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
-  transition: 0.2s;
+  transition: all 0.2s ease;
 }
 
 .stop.active {
-  background: radial-gradient(circle at center, #ffcc00 20%, #ffaa00 100%);
-  box-shadow: 0 0 15px #ffcc00, inset -2px -2px 6px rgba(0,0,0,0.3);
-  transform: scale(1.05);
+  background-color: yellow;     /* fills the stop button */
+  box-shadow: 0 0 15px yellow;  /* glowing effect */
+  color: black;                 /* text stays visible */
+  transform: scale(1.05);       /* makes it pop slightly */
 }
 
 .stop:hover {

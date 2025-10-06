@@ -15,47 +15,6 @@
 <body>
   <div class="organ-layout">
 
-    <script>
-    // Request MIDI Access
-    if (navigator.requestMIDIAccess) {
-      navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
-    } else {
-      alert("Web MIDI not supported in this browser. Use Chrome or Edge.");
-    }
-
-    function onMIDISuccess(midiAccess) {
-      console.log("MIDI ready!");
-      const inputs = midiAccess.inputs.values();
-      for (let input of inputs) {
-        input.onmidimessage = handleMIDIMessage;
-      }
-    }
-
-    function onMIDIFailure() {
-      console.error("Could not access your MIDI devices.");
-    }
-
-    function handleMIDIMessage(message) {
-      const [command, note, velocity] = message.data;
-
-      if (command === 144 && velocity > 0) {
-        noteOn(note);
-      } else if (command === 128 || (command === 144 && velocity === 0)) {
-        noteOff(note);
-      }
-    }
-
-    function noteOn(note) {
-      const key = document.querySelector(`.key[data-note='${note}']`);
-      if (key) key.classList.add('active');
-    }
-
-    function noteOff(note) {
-      const key = document.querySelector(`.key[data-note='${note}']`);
-      if (key) key.classList.remove('active');
-    }
-  </script>
-
   </div>
 
             <!-- LEFT STOPS -->
@@ -68,8 +27,32 @@
             
         </div>
 
+        <div class="stops.active">
+
+        </div>
+
         <div class="pedal">
             <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+            <div class="oak"></div>
+            <div class="brown"></div>
+            <div class="oak"></div>
+
         </div>
 
         <div class="choir">
@@ -328,49 +311,10 @@
             <div class="white"></div>
         </div>
 
-        </div>
+      </div>
 
-        <script>
-// Toggle stop lighting
-document.querySelectorAll('.stop').forEach(stop => {
-  stop.addEventListener('click', () => {
-    stop.classList.toggle('active');
-  });
-});
-</script>
 
-<script>
-  // For mouse clicks
-  const keys = document.querySelectorAll('.key');
-  keys.forEach(key => {
-    key.addEventListener('mousedown', () => key.classList.add('active'));
-    key.addEventListener('mouseup', () => key.classList.remove('active'));
-    key.addEventListener('mouseleave', () => key.classList.remove('active'));
-  });
-
-  // For MIDI input (optional)
-  if (navigator.requestMIDIAccess) {
-    navigator.requestMIDIAccess().then(onMIDISuccess);
-  }
-
-  function onMIDISuccess(midiAccess) {
-    for (let input of midiAccess.inputs.values()) {
-      input.onmidimessage = handleMIDIMessage;
-    }
-  }
-
-  function handleMIDIMessage(event) {
-    const [command, note, velocity] = event.data;
-
-    if (command === 144 && velocity > 0) { // note on
-      const key = document.querySelector(`.key[data-note='${note}']`);
-      if (key) key.classList.add('active');
-    } else if (command === 128 || (command === 144 && velocity === 0)) { // note off
-      const key = document.querySelector(`.key[data-note='${note}']`);
-      if (key) key.classList.remove('active');
-    }
-  }
-</script>
     </div>
+    <script src="index.js"></script>
 </body>
 </html>
