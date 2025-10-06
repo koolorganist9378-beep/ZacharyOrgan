@@ -19,8 +19,16 @@ body{
     border: 1px solid red;
 }
 
-.great{
+.choir{
     display: flex;
+}
+
+.great{
+    display:flex;
+}
+
+.swell{
+    display:flex;
 }
 
 .white{
@@ -108,4 +116,41 @@ body{
   text-align: center;
   line-height: 40px;
   box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
+}
+
+.key.active {
+  background-color: yellow;
+}
+
+.manual {
+  position: relative;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.key {
+  width: 30px;
+  height: 120px;
+  margin: 1px;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.key.white {
+  background-color: white;
+  z-index: 1;
+}
+
+.key.black {
+  background-color: black;
+  width: 20px;
+  height: 80px;
+  margin-left: -10px;
+  margin-right: -10px;
+  z-index: 2;
+  position: relative;
 }
