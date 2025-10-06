@@ -23,12 +23,22 @@ body{
     height: 45px;
     border: 1px solid #333;
     background: white;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .black{
-    width: 5.5px;
+    width: 6px;
     height: 32.5px;
     background-color: black;
     margin-left: -6.25px;
     margin-right: -6.25px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     z-index: 2;
+}
+.stops{
+    width: 100px;
+    height: 100px;
+    background-color:wheat;
+    border-radius: 50%;
 }
