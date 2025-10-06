@@ -13,3 +13,18 @@ body{
     height: 400px;
     border: 1px solid red;
 }
+.great{
+    display: flex;
+}
+.white{
+    width: 25px;
+    height: 100px;
+    border: 1px solid #333;
+    background: white;
+}
+.black{
+    width: 12.5px;
+    height: 72.5px;
+    background-color: black;
+    margin-left: -6.25px;
+}
