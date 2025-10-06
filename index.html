@@ -10,6 +10,72 @@
 <body>
     <div class="organ-layout"></div>
 
+    </style>
+</head>
+<body>
+  <div class="organ-layout">
+
+    <script>
+    // Request MIDI Access
+    if (navigator.requestMIDIAccess) {
+      navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+    } else {
+      alert("Web MIDI not supported in this browser. Use Chrome or Edge.");
+    }
+
+    function onMIDISuccess(midiAccess) {
+      console.log("MIDI ready!");
+      const inputs = midiAccess.inputs.values();
+      for (let input of inputs) {
+        input.onmidimessage = handleMIDIMessage;
+      }
+    }
+
+    function onMIDIFailure() {
+      console.error("Could not access your MIDI devices.");
+    }
+
+    function handleMIDIMessage(message) {
+      const [command, note, velocity] = message.data;
+
+      if (command === 144 && velocity > 0) {
+        noteOn(note);
+      } else if (command === 128 || (command === 144 && velocity === 0)) {
+        noteOff(note);
+      }
+    }
+
+    function noteOn(note) {
+      const key = document.querySelector(`.key[data-note='${note}']`);
+      if (key) key.classList.add('active');
+    }
+
+    function noteOff(note) {
+      const key = document.querySelector(`.key[data-note='${note}']`);
+      if (key) key.classList.remove('active');
+    }
+  </script>
+
+    <div class="console">
+      <h2>Organ Manual</h2>
+      <div class="manual" id="manual1">
+        <!-- Basic octave for demo -->
+        <div class="key white" data-note="60"></div> <!-- C4 -->
+        <div class="key black" data-note="61"></div> <!-- C#4 -->
+        <div class="key white" data-note="62"></div> <!-- D4 -->
+        <div class="key black" data-note="63"></div> <!-- D#4 -->
+        <div class="key white" data-note="64"></div> <!-- E4 -->
+        <div class="key white" data-note="65"></div> <!-- F4 -->
+        <div class="key black" data-note="66"></div> <!-- F#4 -->
+        <div class="key white" data-note="67"></div> <!-- G4 -->
+        <div class="key black" data-note="68"></div> <!-- G#4 -->
+        <div class="key white" data-note="69"></div> <!-- A4 -->
+        <div class="key black" data-note="70"></div> <!-- A#4 -->
+        <div class="key white" data-note="71"></div> <!-- B4 -->
+      </div>
+    </div>
+  </div>
+
             <!-- LEFT STOPS -->
         <div class="stops-left">
             <div class="stop">COR DE NUIT 8'</div>
@@ -18,20 +84,76 @@
             <div class="stop">WALDFLUTE 2'</div>
         </div>
 
-            <!-- ORGAN CONSOLE (manuals + pedal) -->
-        <div class="console">
-            <div class="manual" id="manual-I">Manual I</div>
-            <div class="manual" id="manual-II">Manual II</div>
-            <div class="manual" id="manual-III">Manual III</div>
-            <div class="pedal">Pedalboard</div>
-        </div>
-
             <!-- RIGHT STOPS -->
         <div class="stops right">
             <div class="stop">Trompette 8′</div>
             <div class="stop">Oboe 8′</div>
             <div class="stop">Clarion 4′</div>
             <div class="stop">Subbass 16′</div>
+        </div>
+
+        <div class="choir">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
         </div>
 
         <div class="great">
@@ -97,6 +219,79 @@
             <div class="white"></div>
             <div class="white"></div>
         </div>
+
+        <div class="swell">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+        </div>
+
+        <script>
+// Toggle stop lighting
+document.querySelectorAll('.stop').forEach(stop => {
+  stop.addEventListener('click', () => {
+    stop.classList.toggle('active');
+  });
+});
+</script>
     </div>
 </body>
 </html>
