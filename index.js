@@ -27,51 +27,6 @@ document.querySelectorAll('.stop').forEach(stop => {
   });
 });
 
-// Request MIDI Access
-    if (navigator.requestMIDIAccess) {
-      navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
-    } else {
-      alert("Web MIDI not supported in this browser. Use Chrome or Edge.");
-    }
-
-    function onMIDISuccess(midiAccess) {
-      console.log("MIDI ready!");
-      const inputs = midiAccess.inputs.values();
-      for (let input of inputs) {
-        input.onmidimessage = handleMIDIMessage;
-      }
-    }
-
-    function onMIDIFailure() {
-      console.error("Could not access your MIDI devices.");
-    }
-
-    function handleMIDIMessage(message) {
-      const [command, note, velocity] = message.data;
-
-      if (command === 144 && velocity > 0) {
-        noteOn(note);
-      } else if (command === 128 || (command === 144 && velocity === 0)) {
-        noteOff(note);
-      }
-    }
-
-    function noteOn(note) {
-      const key = document.querySelector(`.key[data-note='${note}']`);
-      if (key) key.classList.add('active');
-    }
-
-    function noteOff(note) {
-      const key = document.querySelector(`.key[data-note='${note}']`);
-      if (key) key.classList.remove('active');
-    }
-
-    document.querySelectorAll('.stop').forEach(stop => {
-  stop.addEventListener('click', () => {
-    stop.classList.toggle('active');
-  });
-});
-
 // Make stops glow when active
 document.querySelectorAll('.stop').forEach(stop => {
   stop.addEventListener('click', () => {
@@ -81,3 +36,33 @@ document.querySelectorAll('.stop').forEach(stop => {
 
 // Add your key lighting, MIDI input, etc. below
 
+// --- MIDI Connection Debug ---
+console.log("🔍 Checking for WebMIDI support...");
+if ("requestMIDIAccess" in navigator) {
+  console.log("✅ Browser supports WebMIDI. Requesting access...");
+  navigator.requestMIDIAccess({ sysex: false })
+    .then(onMIDISuccess)
+    .catch(onMIDIFailure);
+} else {
+  console.error("❌ This browser does NOT support WebMIDI.");
+}
+
+function onMIDISuccess(midiAccess) {
+  console.log("✅ MIDI ready! Inputs found:", midiAccess.inputs.size);
+  if (midiAccess.inputs.size === 0) {
+    console.warn("⚠️ No MIDI devices detected. Plug one in and refresh.");
+  }
+  for (let input of midiAccess.inputs.values()) {
+    console.log("🎹 Listening to:", input.name);
+    input.onmidimessage = handleMIDIMessage;
+  }
+}
+
+function onMIDIFailure(err) {
+  console.error("❌ MIDI access failed:", err);
+}
+
+function handleMIDIMessage(event) {
+  const [cmd, note, vel] = event.data;
+  console.log("MIDI data:", cmd, note, vel);
+}
