@@ -19,6 +19,10 @@ body{
     border: 1px solid red;
 }
 
+.pedal{
+    display:flex;
+}
+
 .choir{
     display: flex;
 }
@@ -28,6 +32,10 @@ body{
 }
 
 .swell{
+    display:flex;
+}
+
+.solo{
     display:flex;
 }
 
@@ -54,8 +62,17 @@ body{
 .organ-layout{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap:40px;
+    justify-content: space-between;
+    width:90%;
+}
+
+.stops-right{
+    transform: translateX(-270px); /* move to the left */
+    
+}
+
+.stops-left{
+    transform: translateX(270px); /* move to the right */
 }
 
 .stops{
@@ -90,18 +107,6 @@ body{
   transform: scale(1.1);
 }
 
-
-.console {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  background-color: #444;
-  padding: 40px 60px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px black;
-}
-
 .manual {
   background-color: #888;
   width: 300px;
@@ -112,19 +117,9 @@ body{
   box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
 }
 
-
-.pedal {
-  background-color: #666;
-  width: 350px;
-  height: 40px;
-  border-radius: 5px;
-  text-align: center;
-  line-height: 40px;
-  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
-}
-
 .key.active {
-  background-color: yellow;
+  background-color: lightgray; /* light up when pressed */
+  box-shadow: 0 0 10px lightgray;
 }
 
 .manual {
@@ -149,9 +144,10 @@ body{
   width: 30px;
   height: 120px;
   margin: 1px;
+  background-color: white;
   border: 1px solid #000;
   cursor: pointer;
-  transition: 0.1s;
+  transition: 0.1s ease;
 }
 
 .key.white {

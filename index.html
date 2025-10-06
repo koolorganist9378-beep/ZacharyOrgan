@@ -56,40 +56,20 @@
     }
   </script>
 
-    <div class="console">
-      <h2>Organ Manual</h2>
-      <div class="manual" id="manual1">
-        <!-- Basic octave for demo -->
-        <div class="key white" data-note="60"></div> <!-- C4 -->
-        <div class="key black" data-note="61"></div> <!-- C#4 -->
-        <div class="key white" data-note="62"></div> <!-- D4 -->
-        <div class="key black" data-note="63"></div> <!-- D#4 -->
-        <div class="key white" data-note="64"></div> <!-- E4 -->
-        <div class="key white" data-note="65"></div> <!-- F4 -->
-        <div class="key black" data-note="66"></div> <!-- F#4 -->
-        <div class="key white" data-note="67"></div> <!-- G4 -->
-        <div class="key black" data-note="68"></div> <!-- G#4 -->
-        <div class="key white" data-note="69"></div> <!-- A4 -->
-        <div class="key black" data-note="70"></div> <!-- A#4 -->
-        <div class="key white" data-note="71"></div> <!-- B4 -->
-      </div>
-    </div>
   </div>
 
             <!-- LEFT STOPS -->
         <div class="stops-left">
-            <div class="stop">COR DE NUIT 8'</div>
-            <div class="stop">PRINCIPAL 8'</div>
-            <div class="stop">OCTAVE 4'</div>
-            <div class="stop">WALDFLUTE 2'</div>
+            <div class="stop">Gemshorn 8'</div>
         </div>
 
             <!-- RIGHT STOPS -->
-        <div class="stops right">
-            <div class="stop">Trompette 8′</div>
-            <div class="stop">Oboe 8′</div>
-            <div class="stop">Clarion 4′</div>
-            <div class="stop">Subbass 16′</div>
+        <div class="stops-right">
+            
+        </div>
+
+        <div class="pedal">
+            <div class="brown"></div>
         </div>
 
         <div class="choir">
@@ -284,6 +264,72 @@
             <div class="white"></div>
         </div>
 
+        <div class="solo">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="white"></div>
+        </div>
+
+        </div>
+
         <script>
 // Toggle stop lighting
 document.querySelectorAll('.stop').forEach(stop => {
@@ -291,6 +337,39 @@ document.querySelectorAll('.stop').forEach(stop => {
     stop.classList.toggle('active');
   });
 });
+</script>
+
+<script>
+  // For mouse clicks
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => {
+    key.addEventListener('mousedown', () => key.classList.add('active'));
+    key.addEventListener('mouseup', () => key.classList.remove('active'));
+    key.addEventListener('mouseleave', () => key.classList.remove('active'));
+  });
+
+  // For MIDI input (optional)
+  if (navigator.requestMIDIAccess) {
+    navigator.requestMIDIAccess().then(onMIDISuccess);
+  }
+
+  function onMIDISuccess(midiAccess) {
+    for (let input of midiAccess.inputs.values()) {
+      input.onmidimessage = handleMIDIMessage;
+    }
+  }
+
+  function handleMIDIMessage(event) {
+    const [command, note, velocity] = event.data;
+
+    if (command === 144 && velocity > 0) { // note on
+      const key = document.querySelector(`.key[data-note='${note}']`);
+      if (key) key.classList.add('active');
+    } else if (command === 128 || (command === 144 && velocity === 0)) { // note off
+      const key = document.querySelector(`.key[data-note='${note}']`);
+      if (key) key.classList.remove('active');
+    }
+  }
 </script>
     </div>
 </body>
