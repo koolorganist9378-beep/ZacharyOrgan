@@ -3,18 +3,13 @@ body {
   margin: 0;
   background-color: #f4f4f8;
   color: #333;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 header {
   background: #222;
   color: white;
   padding: 1rem;
+  text-align: center;
 }
 
 header nav a {
@@ -45,13 +40,28 @@ button {
 button:hover {
   background-color: #3867d6;
 }
+.hero-image {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin: 20px 0;
+}
 
-footer {
+/*
+==================
+ABOUT PAGE
+==================
+*/
+
+.about {
+  max-width: 800px;
+  margin: 100px auto 80px;
   text-align: center;
-  background: #222;
-  color: #aaa;
-  padding: 1rem;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+  line-height: 1.6;
+}
+
+.about h2 {
+  margin-top: 2rem;
+  color: #4b7bec;
 }
