@@ -1,0 +1,85 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  background-color: #f4f4f8;
+  color: #333;
+}
+
+header {
+  background: #222;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+header nav a {
+  color: #ddd;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: white;
+}
+
+.intro {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+/* Grid of instruments */
+.instrument-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.instrument-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  height: 75px;
+  width: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instrument-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.instrument-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.instrument-card p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.instrument-card button {
+  background: #0078d4;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.instrument-card button:hover {
+  background: #005fa3;
+}
+
+footer {
+  background-color: rgba(255, 255, 255, 0.05);
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 0.9rem;
+}

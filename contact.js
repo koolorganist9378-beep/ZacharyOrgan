@@ -1,7 +1,3 @@
-document.getElementById("learnMoreBtn").addEventListener("click", () => {
-  alert("More features coming soon — including stop combinations and audio playback!");
-});
-
 // Fade-in when the page loads
 window.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("fade-in");
